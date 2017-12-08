@@ -528,6 +528,9 @@ public class Reader implements OpenApiReader {
                             !requestBody.getContent().isEmpty()) {
                         if (requestBodyParameter.getSchema() != null) {
                             for (MediaType mediaType : requestBody.getContent().values()) {
+                                if (mediaType.getSchema() == null) {
+                                    mediaType.setSchema(new Schema());
+                                }
                                 if (StringUtils.isBlank(mediaType.getSchema().getType())) {
                                     mediaType.getSchema().setType(requestBodyParameter.getSchema().getType());
                                 }
